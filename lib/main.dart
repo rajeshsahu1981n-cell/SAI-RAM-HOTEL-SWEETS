@@ -18,7 +18,6 @@ class SaiRamHotelApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF6B351A),
         ),
-        fontFamily: 'sans',
       ),
       home: const HomePage(),
     );
@@ -93,7 +92,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF6B351A),
         foregroundColor: Colors.white,
-        elevation: 0,
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -106,9 +104,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               'Hotel & Sweets',
-              style: TextStyle(
-                fontSize: 13,
-              ),
+              style: TextStyle(fontSize: 13),
             ),
           ],
         ),
@@ -116,7 +112,17 @@ class _HomePageState extends State<HomePage> {
           Stack(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        cartCount == 0
+                            ? 'Cart abhi empty hai'
+                            : 'Cart me $cartCount items hain',
+                      ),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.shopping_cart_outlined),
               ),
               if (cartCount > 0)
@@ -150,7 +156,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               // Welcome Banner
               Container(
                 width: double.infinity,
@@ -178,4 +183,210 @@ class _HomePageState extends State<HomePage> {
                         color: Color(0xFF6B351A),
                       ),
                     ),
-                    SizedBox(height:
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // Categories
+              const SectionTitle(title: 'Shop by Category'),
+
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 105,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CategoryCard(
+                      title: 'Sweets',
+                      icon: Icons.cake_outlined,
+                    ),
+                    CategoryCard(
+                      title: 'Namkeen',
+                      icon: Icons.fastfood_outlined,
+                    ),
+                    CategoryCard(
+                      title: 'Bakery',
+                      icon: Icons.bakery_dining_outlined,
+                    ),
+                    CategoryCard(
+                      title: 'Drinks',
+                      icon: Icons.local_drink_outlined,
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // Today's Special
+              const SectionTitle(title: "Today's Special"),
+
+              const SizedBox(height: 12),
+
+              ProductCard(
+                product: products[0],
+                onAdd: addToCart,
+              ),
+
+              const SizedBox(height: 25),
+
+              // Popular Sweets
+              const SectionTitle(title: 'Popular Sweets'),
+
+              const SizedBox(height: 12),
+
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: products.length,
+                gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.78,
+                ),
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    product: products[index],
+                    onAdd: addToCart,
+                  );
+                },
+              ),
+
+              const SizedBox(height: 25),
+
+              // Contact
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6B351A),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Column(
+                  children: [
+                    Icon(
+                      Icons.storefront,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Sai Ram Hotel & Sweets',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Fresh • Quality • Delicious',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------- SECTION TITLE ----------------
+
+class SectionTitle extends StatelessWidget {
+  final String title;
+
+  const SectionTitle({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF54250F),
+          ),
+        ),
+        const Icon(
+          Icons.arrow_forward,
+          color: Color(0xFF6B351A),
+        ),
+      ],
+    );
+  }
+}
+
+// ---------------- CATEGORY CARD ----------------
+
+class CategoryCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const CategoryCard({
+    super.key,
+    required this.title,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      margin: const EdgeInsets.only(right: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.brown.withOpacity(0.10),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 34,
+            color: const Color(0xFF6B351A),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------- PRODUCT CARD ----------------
