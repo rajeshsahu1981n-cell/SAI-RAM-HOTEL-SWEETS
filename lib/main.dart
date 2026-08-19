@@ -704,7 +704,7 @@ Please confirm my order.
               : null,
 
       bottomNavigationBar:
-          const BottomNavigationBar(
+      BottomNavigationBar(
         currentIndex: 0,
 
         selectedItemColor:
