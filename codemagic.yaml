@@ -6,8 +6,6 @@ workflows:
 
     environment:
       flutter: stable
-      android_signing:
-        - sai_ram_debug_keystore
 
     scripts:
       - name: Generate Android project files
