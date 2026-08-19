@@ -404,8 +404,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      bottomNavigationBar:
-          const BottomNavigationBar(
+      bottomNavigationBar: 
+      BottomNavigationBar(
+        
         currentIndex: 0,
         selectedItemColor: Color(0xFF6B351A),
         items: [
