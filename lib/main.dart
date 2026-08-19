@@ -5,7 +5,9 @@ void main() {
   runApp(const SaiRamApp());
 }
 
-// ================= APP =================
+// =====================================================
+// APP
+// =====================================================
 
 class SaiRamApp extends StatelessWidget {
   const SaiRamApp({super.key});
@@ -27,23 +29,29 @@ class SaiRamApp extends StatelessWidget {
   }
 }
 
-// ================= PRODUCT =================
+// =====================================================
+// PRODUCT
+// =====================================================
 
 class Product {
   final String name;
   final int price;
   final String unit;
-  final IconData icon;
+  final String category;
+  final String imageUrl;
 
   const Product({
     required this.name,
     required this.price,
     required this.unit,
-    required this.icon,
+    required this.category,
+    required this.imageUrl,
   });
 }
 
-// ================= CART ITEM =================
+// =====================================================
+// CART
+// =====================================================
 
 class CartItem {
   final Product product;
@@ -57,7 +65,9 @@ class CartItem {
   int get total => product.price * quantity;
 }
 
-// ================= HOME =================
+// =====================================================
+// HOME PAGE
+// =====================================================
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -67,165 +77,320 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String selectedCategory = 'Sweets';
+
+  final List<CartItem> cart = [];
+
+  // ===================================================
+  // PRODUCTS
+  // ===================================================
+
   final List<Product> products = const [
+
+    // ---------------- SWEETS ----------------
+
     Product(
       name: 'Ghewar',
       price: 650,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Rasmalai',
       price: 480,
       unit: 'kg',
-      icon: Icons.icecream,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Gulab Jamun',
       price: 280,
       unit: 'kg',
-      icon: Icons.cookie,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1666190094767-3c7e4d8f7a8a?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Malaichap',
       price: 400,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Cham-Cham',
       price: 400,
       unit: 'kg',
-      icon: Icons.cookie,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Rajbhog',
       price: 30,
       unit: 'piece',
-      icon: Icons.brightness_1,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1589119908995-c6837fa14848?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Chena',
       price: 240,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Rabdi',
       price: 400,
       unit: 'kg',
-      icon: Icons.icecream,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=600&q=80',
     ),
+
+    Product(
+      name: 'Malai',
+      price: 400,
+      unit: 'kg',
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80',
+    ),
+
     Product(
       name: 'Dhoodh Barfi',
       price: 400,
       unit: 'kg',
-      icon: Icons.square,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Milk Cake',
       price: 480,
       unit: 'kg',
-      icon: Icons.square,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Besan Barfi',
       price: 300,
       unit: 'kg',
-      icon: Icons.square,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Boondi Laddu',
       price: 240,
       unit: 'kg',
-      icon: Icons.brightness_1,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1606471191009-63994c53433b?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Balusahi',
       price: 240,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Magaj Laddu',
       price: 200,
       unit: 'kg',
-      icon: Icons.brightness_1,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Lal Peda',
       price: 360,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1607920592519-0c7e1c8c8c4c?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'White Peda',
       price: 380,
       unit: 'kg',
-      icon: Icons.circle,
+      category: 'Sweets',
+      imageUrl:
+          'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=80',
     ),
+
+    // ---------------- NAMKEEN ----------------
+
     Product(
       name: 'Namkeen',
       price: 240,
       unit: 'kg',
-      icon: Icons.fastfood,
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1599599810694-57a3e0e4a3f0?auto=format&fit=crop&w=600&q=80',
     ),
+
+    Product(
+      name: 'Dalmoth',
+      price: 240,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Mixture',
+      price: 240,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Farali Namkeen',
+      price: 280,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1627662168804-7e8c2f1b1f1d?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Sev',
+      price: 200,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1627662168804-7e8c2f1b1f1d?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Chiwda Namkeen',
+      price: 240,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Logsev',
+      price: 240,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    Product(
+      name: 'Katha Metha',
+      price: 240,
+      unit: 'kg',
+      category: 'Namkeen',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+    ),
+
+    // ---------------- NASTA ----------------
+
     Product(
       name: 'Samosa',
       price: 10,
       unit: 'piece',
-      icon: Icons.fastfood,
+      category: 'Nasta',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Kachori',
       price: 15,
       unit: 'piece',
-      icon: Icons.fastfood,
+      category: 'Nasta',
+      imageUrl:
+          'https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=600&q=80',
     ),
+
     Product(
       name: 'Aloo Bonda',
       price: 10,
       unit: 'piece',
-      icon: Icons.fastfood,
+      category: 'Nasta',
+      imageUrl:
+          'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=600&q=80',
     ),
   ];
 
-  final List<CartItem> cart = [];
+  // ===================================================
+  // GETTERS
+  // ===================================================
+
+  List<Product> get filteredProducts {
+    return products
+        .where(
+          (product) =>
+              product.category == selectedCategory,
+        )
+        .toList();
+  }
 
   int get cartCount {
-    int count = 0;
-
-    for (final item in cart) {
-      count += item.quantity;
-    }
-
-    return count;
+    return cart.fold(
+      0,
+      (sum, item) => sum + item.quantity,
+    );
   }
 
   int get grandTotal {
-    int total = 0;
-
-    for (final item in cart) {
-      total += item.total;
-    }
-
-    return total;
+    return cart.fold(
+      0,
+      (sum, item) => sum + item.total,
+    );
   }
 
-  // ================= ADD =================
+  // ===================================================
+  // ADD TO CART
+  // ===================================================
 
   void addToCart(Product product) {
     setState(() {
-      for (final item in cart) {
-        if (item.product.name == product.name) {
-          item.quantity++;
-          return;
-        }
-      }
-
-      cart.add(
-        CartItem(product: product),
+      final index = cart.indexWhere(
+        (item) =>
+            item.product.name == product.name,
       );
+
+      if (index >= 0) {
+        cart[index].quantity++;
+      } else {
+        cart.add(
+          CartItem(product: product),
+        );
+      }
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -233,20 +398,19 @@ class _HomePageState extends State<HomePage> {
         content: Text(
           '${product.name} cart me add ho gaya',
         ),
-        duration: const Duration(milliseconds: 800),
+        duration:
+            const Duration(milliseconds: 700),
       ),
     );
   }
 
-  // ================= PLUS / MINUS =================
-
-  void increase(int index) {
+  void plus(int index) {
     setState(() {
       cart[index].quantity++;
     });
   }
 
-  void decrease(int index) {
+  void minus(int index) {
     setState(() {
       cart[index].quantity--;
 
@@ -256,36 +420,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void removeItem(int index) {
+  void deleteItem(int index) {
     setState(() {
       cart.removeAt(index);
     });
   }
 
-  // ================= CALL =================
-
-  Future<void> callShop() async {
-    final uri = Uri.parse(
-      'tel:8839796889',
-    );
-
-    await launchUrl(uri);
-  }
-
-  // ================= LOCATION =================
-
-  Future<void> openLocation() async {
-    final uri = Uri.parse(
-      'https://www.google.com/maps/search/?api=1&query=Lakhnadon+Rest+House+Petrol+Pump',
-    );
-
-    await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    );
-  }
-
-  // ================= WHATSAPP =================
+  // ===================================================
+  // WHATSAPP
+  // ===================================================
 
   Future<void> sendWhatsApp() async {
     if (cart.isEmpty) {
@@ -294,32 +437,30 @@ class _HomePageState extends State<HomePage> {
           content: Text('Cart empty hai'),
         ),
       );
-
       return;
     }
 
     String message = '''
 *SAI RAM HOTEL & SWEETS*
-
-*Mera Order:*
-
+━━━━━━━━━━━━━━━━━━
+*MY ORDER*
+━━━━━━━━━━━━━━━━━━
 ''';
 
     for (final item in cart) {
       message +=
-          '${item.product.name} × ${item.quantity} = ₹${item.total}\n';
+          '• ${item.product.name} × ${item.quantity} = ₹${item.total}\n';
     }
 
     message += '''
-
---------------------
-*TOTAL = ₹$grandTotal*
---------------------
-
-Please confirm my order.
+━━━━━━━━━━━━━━━━━━
+*GRAND TOTAL: ₹$grandTotal*
+━━━━━━━━━━━━━━━━━━
 
 📍 Lakhnadon Rest House ke Samne Petrol Pump
 📞 8839796889
+
+Please confirm my order.
 ''';
 
     final uri = Uri.parse(
@@ -332,7 +473,61 @@ Please confirm my order.
     );
   }
 
-  // ================= BILL =================
+  // ===================================================
+  // CALL
+  // ===================================================
+
+  Future<void> callShop() async {
+    final uri = Uri.parse(
+      'tel:8839796889',
+    );
+
+    await launchUrl(uri);
+  }
+
+  // ===================================================
+  // LOCATION
+  // ===================================================
+
+  Future<void> openLocation() async {
+    final uri = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=Lakhnadon+Rest+House+Petrol+Pump',
+    );
+
+    await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
+  // ===================================================
+  // CART
+  // ===================================================
+
+  void openCart() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) {
+        return CartSheet(
+          cart: cart,
+          total: grandTotal,
+          onPlus: plus,
+          onMinus: minus,
+          onDelete: deleteItem,
+          onPlaceOrder: () {
+            Navigator.pop(context);
+            showBill();
+          },
+        );
+      },
+    );
+  }
+
+  // ===================================================
+  // BILL
+  // ===================================================
 
   void showBill() {
     if (cart.isEmpty) {
@@ -341,7 +536,6 @@ Please confirm my order.
           content: Text('Cart empty hai'),
         ),
       );
-
       return;
     }
 
@@ -349,7 +543,7 @@ Please confirm my order.
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) {
+      builder: (_) {
         return BillSheet(
           cart: cart,
           total: grandTotal,
@@ -362,46 +556,28 @@ Please confirm my order.
     );
   }
 
-  // ================= CART =================
-
-  void openCart() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return CartSheet(
-          cart: cart,
-          total: grandTotal,
-          onPlus: increase,
-          onMinus: decrease,
-          onRemove: removeItem,
-          onPlaceOrder: () {
-            Navigator.pop(context);
-            showBill();
-          },
-        );
-      },
-    );
-  }
-
-  // ================= UI =================
+  // ===================================================
+  // UI
+  // ===================================================
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF6B351A),
+        backgroundColor:
+            const Color(0xFF6B351A),
         foregroundColor: Colors.white,
 
         title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment:
+              CrossAxisAlignment.start,
           children: [
             Text(
               'Sai Ram',
               style: TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.bold,
+                fontWeight:
+                    FontWeight.bold,
               ),
             ),
             Text(
@@ -429,12 +605,14 @@ Please confirm my order.
                   top: 5,
                   child: CircleAvatar(
                     radius: 9,
-                    backgroundColor: Colors.orange,
+                    backgroundColor:
+                        Colors.orange,
                     child: Text(
                       '$cartCount',
-                      style: const TextStyle(
-                        fontSize: 10,
+                      style:
+                          const TextStyle(
                         color: Colors.white,
+                        fontSize: 10,
                       ),
                     ),
                   ),
@@ -445,34 +623,46 @@ Please confirm my order.
       ),
 
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding:
+            const EdgeInsets.all(16),
 
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
+          crossAxisAlignment:
+              CrossAxisAlignment.start,
           children: [
-            // ================= BANNER =================
+
+            // BANNER
 
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(22),
+              width:
+                  double.infinity,
+              padding:
+                  const EdgeInsets.all(22),
 
-              decoration: BoxDecoration(
-                color: const Color(0xFFF0D3B5),
-                borderRadius: BorderRadius.circular(22),
+              decoration:
+                  BoxDecoration(
+                color:
+                    const Color(
+                  0xFFF0D3B5,
+                ),
+                borderRadius:
+                    BorderRadius.circular(
+                  22,
+                ),
               ),
 
               child: const Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
-
                 children: [
                   Text(
                     'स्वाद जो याद रह जाए ❤️',
                     style: TextStyle(
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF54250F),
+                      fontWeight:
+                          FontWeight.bold,
+                      color:
+                          Color(0xFF54250F),
                     ),
                   ),
 
@@ -481,27 +671,30 @@ Please confirm my order.
                   Text(
                     'Fresh sweets • Pure ingredients • Best taste',
                     style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF6B351A),
+                      color:
+                          Color(0xFF6B351A),
                     ),
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 18),
 
-            // ================= CONTACT BUTTONS =================
+            // CALL LOCATION
 
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: callShop,
+                  child:
+                      ElevatedButton.icon(
+                    onPressed:
+                        callShop,
                     icon: const Icon(
                       Icons.phone,
                     ),
-                    label: const Text(
+                    label:
+                        const Text(
                       'Call',
                     ),
                   ),
@@ -510,12 +703,16 @@ Please confirm my order.
                 const SizedBox(width: 10),
 
                 Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: openLocation,
-                    icon: const Icon(
+                  child:
+                      ElevatedButton.icon(
+                    onPressed:
+                        openLocation,
+                    icon:
+                        const Icon(
                       Icons.location_on,
                     ),
-                    label: const Text(
+                    label:
+                        const Text(
                       'Location',
                     ),
                   ),
@@ -525,1111 +722,101 @@ Please confirm my order.
 
             const SizedBox(height: 25),
 
-            const SectionTitle(
-              title: 'Shop by Category',
-            ),
-
-            const SizedBox(height: 12),
-
-            SizedBox(
-              height: 105,
-
-              child: ListView(
-                scrollDirection:
-                    Axis.horizontal,
-
-                children: const [
-                  CategoryCard(
-                    title: 'Sweets',
-                    icon: Icons.cake_outlined,
-                  ),
-
-                  CategoryCard(
-                    title: 'Namkeen',
-                    icon: Icons.fastfood_outlined,
-                  ),
-
-                  CategoryCard(
-                    title: 'Nasta',
-                    icon: Icons.restaurant_outlined,
-                  ),
-
-                  CategoryCard(
-                    title: 'Special',
-                    icon: Icons.star_outline,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 25),
-
-            const SectionTitle(
-              title: "Today's Special",
-            ),
-
-            const SizedBox(height: 12),
-
-            ProductCard(
-              product: products[0],
-              onAdd: () {
-                addToCart(products[0]);
-              },
-              special: true,
-            ),
-
-            const SizedBox(height: 25),
-
-            const SectionTitle(
-              title: 'Menu',
-            ),
-
-            const SizedBox(height: 12),
-
-            GridView.builder(
-              shrinkWrap: true,
-
-              physics:
-                  const NeverScrollableScrollPhysics(),
-
-              itemCount: products.length,
-
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.74,
-              ),
-
-              itemBuilder: (
-                context,
-                index,
-              ) {
-                return ProductCard(
-                  product: products[index],
-
-                  onAdd: () {
-                    addToCart(
-                      products[index],
-                    );
-                  },
-                );
-              },
-            ),
-
-            const SizedBox(height: 25),
-
-            // ================= SHOP INFO =================
-
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-
-              decoration: BoxDecoration(
-                color: const Color(0xFF6B351A),
-                borderRadius:
-                    BorderRadius.circular(20),
-              ),
-
-              child: const Column(
-                children: [
-                  Icon(
-                    Icons.storefront,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-
-                  SizedBox(height: 8),
-
-                  Text(
-                    'Sai Ram Hotel & Sweets',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight:
-                          FontWeight.bold,
-                    ),
-                  ),
-
-                  SizedBox(height: 8),
-
-                  Text(
-                    '📍 Lakhnadon Rest House ke Samne Petrol Pump',
-                    textAlign:
-                        TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white70,
-                    ),
-                  ),
-
-                  SizedBox(height: 8),
-
-                  Text(
-                    '📞 8839796889',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-
-      // ================= FLOATING CART =================
-
-      floatingActionButton:
-          cartCount > 0
-              ? FloatingActionButton.extended(
-                  onPressed: openCart,
-
-                  backgroundColor:
-                      const Color(0xFF6B351A),
-
-                  foregroundColor:
-                      Colors.white,
-
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                  ),
-
-                  label: Text(
-                    'Cart • ₹$grandTotal',
-                  ),
-                )
-              : null,
-
-      bottomNavigationBar:
-      BottomNavigationBar(
-        currentIndex: 0,
-
-        selectedItemColor:
-            Color(0xFF6B351A),
-
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'Home',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.receipt_long,
-            ),
-            label: 'Orders',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ================= SECTION TITLE =================
-
-class SectionTitle
-    extends StatelessWidget {
-  final String title;
-
-  const SectionTitle({
-    super.key,
-    required this.title,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Row(
-      mainAxisAlignment:
-          MainAxisAlignment.spaceBetween,
-
-      children: [
-        Text(
-          title,
-
-          style: const TextStyle(
-            fontSize: 21,
-            fontWeight:
-                FontWeight.bold,
-            color:
-                Color(0xFF54250F),
-          ),
-        ),
-
-        const Icon(
-          Icons.arrow_forward,
-          color:
-              Color(0xFF6B351A),
-        ),
-      ],
-    );
-  }
-}
-
-// ================= CATEGORY =================
-
-class CategoryCard
-    extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const CategoryCard({
-    super.key,
-    required this.title,
-    required this.icon,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Container(
-      width: 100,
-
-      margin:
-          const EdgeInsets.only(
-        right: 12,
-      ),
-
-      decoration:
-          BoxDecoration(
-        color: Colors.white,
-
-        borderRadius:
-            BorderRadius.circular(
-          18,
-        ),
-
-        border: Border.all(
-          color:
-              const Color(
-            0xFFE7D4C2,
-          ),
-        ),
-      ),
-
-      child: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center,
-
-        children: [
-          Icon(
-            icon,
-
-            size: 34,
-
-            color:
-                const Color(
-              0xFF6B351A,
-            ),
-          ),
-
-          const SizedBox(
-            height: 8,
-          ),
-
-          Text(
-            title,
-
-            style:
-                const TextStyle(
-              fontWeight:
-                  FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ================= PRODUCT CARD =================
-
-class ProductCard
-    extends StatelessWidget {
-  final Product product;
-  final VoidCallback onAdd;
-  final bool special;
-
-  const ProductCard({
-    super.key,
-    required this.product,
-    required this.onAdd,
-    this.special = false,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Container(
-      padding:
-          const EdgeInsets.all(
-        12,
-      ),
-
-      decoration:
-          BoxDecoration(
-        color: Colors.white,
-
-        borderRadius:
-            BorderRadius.circular(
-          18,
-        ),
-
-        border: Border.all(
-          color:
-              const Color(
-            0xFFE7D4C2,
-          ),
-        ),
-      ),
-
-      child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
-
-        children: [
-          Expanded(
-            child: Container(
-              width:
-                  double.infinity,
-
-              decoration:
-                  BoxDecoration(
+            const Text(
+              'Categories',
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight:
+                    FontWeight.bold,
                 color:
-                    const Color(
-                  0xFFF3E0CB,
-                ),
-
-                borderRadius:
-                    BorderRadius.circular(
-                  15,
-                ),
-              ),
-
-              child: Center(
-                child: Icon(
-                  product.icon,
-
-                  size: special
-                      ? 75
-                      : 55,
-
-                  color:
-                      const Color(
-                    0xFF8B451F,
-                  ),
-                ),
+                    Color(0xFF54250F),
               ),
             ),
-          ),
 
-          const SizedBox(
-            height: 9,
-          ),
+            const SizedBox(height: 12),
 
-          Text(
-            product.name,
+            // CATEGORY BUTTONS
 
-            maxLines: 1,
-
-            overflow:
-                TextOverflow.ellipsis,
-
-            style:
-                const TextStyle(
-              fontSize: 16,
-              fontWeight:
-                  FontWeight.bold,
-              color:
-                  Color(0xFF54250F),
-            ),
-          ),
-
-          const SizedBox(
-            height: 4,
-          ),
-
-          Text(
-            '₹${product.price}/${product.unit}',
-
-            style:
-                const TextStyle(
-              fontSize: 14,
-              color:
-                  Color(0xFF8B451F),
-              fontWeight:
-                  FontWeight.w600,
-            ),
-          ),
-
-          const SizedBox(
-            height: 7,
-          ),
-
-          SizedBox(
-            width:
-                double.infinity,
-
-            child:
-                ElevatedButton(
-              onPressed: onAdd,
-
-              style:
-                  ElevatedButton.styleFrom(
-                backgroundColor:
-                    const Color(
-                  0xFF6B351A,
-                ),
-
-                foregroundColor:
-                    Colors.white,
-
-                padding:
-                    const EdgeInsets
-                        .symmetric(
-                  vertical: 9,
-                ),
-
-                shape:
-                    RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius
-                          .circular(
-                    10,
-                  ),
-                ),
-              ),
-
-              child:
-                  const Text(
-                'ADD',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ================= CART SHEET =================
-
-class CartSheet
-    extends StatelessWidget {
-  final List<CartItem> cart;
-  final int total;
-
-  final void Function(
-    int index,
-  ) onPlus;
-
-  final void Function(
-    int index,
-  ) onMinus;
-
-  final void Function(
-    int index,
-  ) onRemove;
-
-  final VoidCallback onPlaceOrder;
-
-  const CartSheet({
-    super.key,
-    required this.cart,
-    required this.total,
-    required this.onPlus,
-    required this.onMinus,
-    required this.onRemove,
-    required this.onPlaceOrder,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Container(
-      height:
-          MediaQuery.of(context)
-                  .size
-                  .height *
-              0.78,
-
-      decoration:
-          const BoxDecoration(
-        color:
-            Color(0xFFFFF8F0),
-
-        borderRadius:
-            BorderRadius.vertical(
-          top: Radius.circular(
-            25,
-          ),
-        ),
-      ),
-
-      child: Column(
-        children: [
-          const Padding(
-            padding:
-                EdgeInsets.all(
-              18,
-            ),
-
-            child: Row(
+            Row(
               children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color:
-                      Color(
-                    0xFF6B351A,
+                Expanded(
+                  child:
+                      CategoryButton(
+                    title: 'Sweets',
+                    icon:
+                        Icons.cake,
+                    selected:
+                        selectedCategory ==
+                            'Sweets',
+                    onTap: () {
+                      setState(() {
+                        selectedCategory =
+                            'Sweets';
+                      });
+                    },
                   ),
                 ),
 
-                SizedBox(
-                  width: 10,
+                const SizedBox(width: 8),
+
+                Expanded(
+                  child:
+                      CategoryButton(
+                    title: 'Namkeen',
+                    icon:
+                        Icons.fastfood,
+                    selected:
+                        selectedCategory ==
+                            'Namkeen',
+                    onTap: () {
+                      setState(() {
+                        selectedCategory =
+                            'Namkeen';
+                      });
+                    },
+                  ),
                 ),
 
-                Text(
-                  'Your Cart',
+                const SizedBox(width: 8),
 
+                Expanded(
+                  child:
+                      CategoryButton(
+                    title: 'Nasta',
+                    icon:
+                        Icons.restaurant,
+                    selected:
+                        selectedCategory ==
+                            'Nasta',
+                    onTap: () {
+                      setState(() {
+                        selectedCategory =
+                            'Nasta';
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment
+                      .spaceBetween,
+              children: [
+                Text(
+                  selectedCategory,
                   style:
-                      TextStyle(
+                      const TextStyle(
                     fontSize: 22,
                     fontWeight:
                         FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          Expanded(
-            child: cart.isEmpty
-                ? const Center(
-                    child: Text(
-                      'Cart empty hai',
-                    ),
-                  )
-                : ListView.builder(
-                    padding:
-                        const EdgeInsets
-                            .symmetric(
-                      horizontal: 16,
-                    ),
-
-                    itemCount:
-                        cart.length,
-
-                    itemBuilder:
-                        (
-                      context,
-                      index,
-                    ) {
-                      final item =
-                          cart[index];
-
-                      return Card(
-                        child:
-                            Padding(
-                          padding:
-                              const EdgeInsets
-                                  .all(
-                            8,
-                          ),
-
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor:
-                                    const Color(
-                                  0xFFF0D3B5,
-                                ),
-
-                                child:
-                                    Icon(
-                                  item.product
-                                      .icon,
-
-                                  color:
-                                      const Color(
-                                    0xFF6B351A,
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(
-                                width: 10,
-                              ),
-
-                              Expanded(
-                                child:
-                                    Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
-
-                                  children: [
-                                    Text(
-                                      item.product
-                                          .name,
-
-                                      style:
-                                          const TextStyle(
-                                        fontWeight:
-                                            FontWeight
-                                                .bold,
-                                      ),
-                                    ),
-
-                                    Text(
-                                      '₹${item.product.price}/${item.product.unit}',
-
-                                      style:
-                                          const TextStyle(
-                                        color:
-                                            Colors.black54,
-                                      ),
-                                    ),
-
-                                    Text(
-                                      'Total: ₹${item.total}',
-
-                                      style:
-                                          const TextStyle(
-                                        fontWeight:
-                                            FontWeight
-                                                .bold,
-                                        color:
-                                            Color(
-                                          0xFF6B351A,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              IconButton(
-                                onPressed:
-                                    () {
-                                  onMinus(
-                                    index,
-                                  );
-                                },
-
-                                icon:
-                                    const Icon(
-                                  Icons
-                                      .remove_circle_outline,
-                                ),
-                              ),
-
-                              Text(
-                                '${item.quantity}',
-
-                                style:
-                                    const TextStyle(
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                  fontSize:
-                                      16,
-                                ),
-                              ),
-
-                              IconButton(
-                                onPressed:
-                                    () {
-                                  onPlus(
-                                    index,
-                                  );
-                                },
-
-                                icon:
-                                    const Icon(
-                                  Icons
-                                      .add_circle_outline,
-                                ),
-                              ),
-
-                              IconButton(
-                                onPressed:
-                                    () {
-                                  onRemove(
-                                    index,
-                                  );
-                                },
-
-                                icon:
-                                    const Icon(
-                                  Icons.delete_outline,
-                                  color:
-                                      Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-          ),
-
-          Container(
-            padding:
-                const EdgeInsets.fromLTRB(
-              18,
-              12,
-              18,
-              20,
-            ),
-
-            color:
-                Colors.white,
-
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment
-                          .spaceBetween,
-
-                  children: [
-                    const Text(
-                      'Grand Total',
-
-                      style:
-                          TextStyle(
-                        fontSize: 20,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
-
-                    Text(
-                      '₹$total',
-
-                      style:
-                          const TextStyle(
-                        fontSize: 23,
-                        fontWeight:
-                            FontWeight.bold,
-                        color:
-                            Color(
-                          0xFF6B351A,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(
-                  height: 12,
-                ),
-
-                SizedBox(
-                  width:
-                      double.infinity,
-
-                  child:
-                      ElevatedButton.icon(
-                    onPressed:
-                        cart.isEmpty
-                            ? null
-                            : onPlaceOrder,
-
-                    icon:
-                        const Icon(
-                      Icons.receipt_long,
-                    ),
-
-                    label:
-                        const Text(
-                      'PLACE ORDER',
-                    ),
-
-                    style:
-                        ElevatedButton
-                            .styleFrom(
-                      backgroundColor:
-                          const Color(
-                        0xFF6B351A,
-                      ),
-
-                      foregroundColor:
-                          Colors.white,
-
-                      padding:
-                          const EdgeInsets
-                              .symmetric(
-                        vertical: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ================= BILL =================
-
-class BillSheet
-    extends StatelessWidget {
-  final List<CartItem> cart;
-  final int total;
-  final VoidCallback onWhatsApp;
-
-  const BillSheet({
-    super.key,
-    required this.cart,
-    required this.total,
-    required this.onWhatsApp,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Container(
-      height:
-          MediaQuery.of(context)
-                  .size
-                  .height *
-              0.80,
-
-      decoration:
-          const BoxDecoration(
-        color: Colors.white,
-
-        borderRadius:
-            BorderRadius.vertical(
-          top: Radius.circular(
-            25,
-          ),
-        ),
-      ),
-
-      child: Column(
-        children: [
-          const Padding(
-            padding:
-                EdgeInsets.all(
-              18,
-            ),
-
-            child: Column(
-              children: [
-                Text(
-                  'SAI RAM HOTEL & SWEETS',
-
-                  style:
-                      TextStyle(
-                    fontSize: 21,
-                    fontWeight:
-                        FontWeight.bold,
                     color:
-                        Color(
-                      0xFF6B351A,
-                    ),
+                        Color(0xFF54250F),
                   ),
-                ),
-
-                SizedBox(
-                  height: 4,
                 ),
 
                 Text(
-                  'ORDER BILL',
-
-                  style:
-                      TextStyle(
-                    fontWeight:
-                        FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const Divider(),
-
-          Expanded(
-            child: ListView.builder(
-              padding:
-                  const EdgeInsets
-                      .symmetric(
-                horizontal: 18,
-              ),
-
-              itemCount:
-                  cart.length,
-
-              itemBuilder:
-                  (
-                context,
-                index,
-              ) {
-                final item =
-                    cart[index];
-
-                return Padding(
-                  padding:
-                      const EdgeInsets
-                          .symmetric(
-                    vertical: 8,
-                  ),
-
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          item.product
-                              .name,
-                        ),
-                      ),
-
-                      Text(
-                        '${item.quantity} × ₹${item.product.price}',
-                      ),
-
-                      const SizedBox(
-                        width: 15,
-                      ),
-
-                      SizedBox(
-                        width: 70,
-                        child: Text(
-                          '₹${item.total}',
-                          textAlign:
-                              TextAlign
-                                  .right,
-
-                          style:
-                              const TextStyle(
-                            fontWeight:
-                                FontWeight
-                                    .bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-
-          const Divider(),
-
-          Padding(
-            padding:
-                const EdgeInsets.all(
-              18,
-            ),
-
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment
-                          .spaceBetween,
-
-                  children: [
-                    const Text(
-                      'GRAND TOTAL',
-
-                      style:
-                          TextStyle(
-                        fontSize: 20,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
-
-                    Text(
-                      '₹$total',
-
-                      style:
-                          const TextStyle(
-                        fontSize: 24,
-                        fontWeight:
-                            FontWeight.bold,
-                        color:
-                            Color(
-                          0xFF6B351A,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(
-                  height: 14,
-                ),
-
-                SizedBox(
-                  width:
-                      double.infinity,
-
-                  child:
-                      ElevatedButton.icon(
-                    onPressed:
-                        onWhatsApp,
-
-                    icon:
-                        const Icon(
-                      Icons.chat,
-                    ),
-
-                    label:
-                        const Text(
-                      'SEND ORDER ON WHATSAPP',
-                    ),
-
-                    style:
-                        ElevatedButton
-                            .styleFrom(
-                      backgroundColor:
-                          const Color(
-                        0xFF6B351A,
-                      ),
-
-                      foregroundColor:
-                          Colors.white,
-
-                      padding:
-                          const EdgeInsets
-                              .symmetric(
-                        vertical: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+                  '${filteredProdu
